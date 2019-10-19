@@ -5,13 +5,25 @@ const catchError = async (ctx, next) => {
         await next()
     } catch (error) {
         // 已知错误
+        if(global.config.enviroment === 'dev') {
+            throw error
+        }
+        
         if(error instanceof HttpException) {
             ctx.body = {
-                errorCode : error.errorCode,
                 msg : error.msg,
+                errorCode : error.errorCode,
                 // status: error.status,
                 requestUrl: error.requestUrl
             }
+            ctx.status = error.status
+        }else{
+            ctx.body = {
+                msg: 'unknown error',
+                errorCode: 999,
+                requestUrl: `${ctx.method} ${ctx.path}`
+            }
+            ctx.status = 500
         }
     }
 }

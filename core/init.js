@@ -3,13 +3,20 @@ const Router = require('koa-router')
 const path = require('path')
 class InitManager {
     static initCore(app) {
-        InitManager.initLoadRouters(app)
+        InitManager.app = app
+        InitManager.initLoadRouters()
+        InitManager.loadConfig()
     }
-    static initLoadRouters(app) {
+    static loadConfig(path = '') {
+        const configPath = path || process.cwd() + '/config/config.js'
+        const config = require(configPath)
+        global.config = config
+    }
+    static initLoadRouters() {
         const apiDIrectory = path.join(process.cwd(), '/app/api')
         requireDirectory(module, apiDIrectory ,{visit: (obj)=>{
             if(obj instanceof Router) {
-                app.use(obj.routes())
+                InitManager.app.use(obj.routes())
             }
         }})
     }
