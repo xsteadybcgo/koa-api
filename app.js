@@ -6,6 +6,8 @@ const app = new Koa()
 
 app.use(bodyParser())
 app.use(catchError)
+
+// 自动注册路由
 InitManager.initCore(app)
 
 app.listen(3000)
