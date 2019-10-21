@@ -16,8 +16,10 @@
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
     "lodash": "^4.17.15",
+    "mysql2": "^1.7.0",
     "nodemon": "^1.19.4",
     "require-directory": "^2.1.1",
+    "sequelize": "^5.21.1",
     "validator": "^11.1.0"
   },
   "devDependencies": {}
