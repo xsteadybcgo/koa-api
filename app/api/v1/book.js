@@ -3,8 +3,8 @@ const router = new Router()
 const { ParameterException } = require('../../../core/http-exception')
 const {PositiveIntergerValidator} = require('../../validators/validator')
 
-router.get('/v1/:id/book/lastest', (ctx, next) => {
-    const v = new PositiveIntergerValidator()
+router.get('/v1/:id/book/lastest', async(ctx, next) => {
+    const v = await new PositiveIntergerValidator()
     v.validate(ctx)
     // throw new Error("error")
     // if (true) {
