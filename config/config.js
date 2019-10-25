@@ -6,5 +6,9 @@ module.exports = {
         port: 3306,
         user: 'root',
         password: 'xhqba'
+    },
+    security: {
+        secretKey: 'l2s_]f*&2="|aBq',
+        expiresIn: 60*60
     }
 }

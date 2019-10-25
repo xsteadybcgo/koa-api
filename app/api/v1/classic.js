@@ -1,12 +1,11 @@
-const Router = require('koa-router')
-const router = new Router()
+const Router = require("koa-router");
+const { Auth } = require("../../../middleware/auth");
+const router = new Router({
+  prefix: "/v1/classic"
+});
 
-router.get('/v1/classic/lastest', (ctx, next) => {
-    console.log(ctx.path);
-    
-    ctx.body = {
-        classic: 'done'
-    }
-})
+router.get("/lastest", new Auth().m, (ctx, next) => {
+  ctx.body = ctx.auth.uid
+});
 
-module.exports = router
+module.exports = router;

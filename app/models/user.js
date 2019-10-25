@@ -1,8 +1,25 @@
 const { sequelize } = require("../../core/db");
 const crypt = require("bcryptjs");
 const { Sequelize, Model } = require("sequelize");
+const { NotFound, AuthFailed } = require("../../core/http-exception");
 
-class User extends Model {}
+class User extends Model {
+  static async verifyEmailPassword(email, plainPwd) {
+    const user = await User.findOne({
+      where: {
+        email
+      }
+    });
+    if (!user) {
+      throw new NotFound("账号不存在");      
+    }
+    const isCorrect = crypt.compareSync(plainPwd, user.password)
+    if(!isCorrect) {
+      throw new AuthFailed("密码不正确")
+    }
+    return user
+  }
+}
 
 User.init(
   {
@@ -21,7 +38,7 @@ User.init(
       set(val) {
         const salt = crypt.genSaltSync(10);
         const pwd = crypt.hashSync(val, salt);
-        this.setDataValue('password', pwd);
+        this.setDataValue("password", pwd);
       }
     },
     openid: {

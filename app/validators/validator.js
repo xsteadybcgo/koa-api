@@ -80,11 +80,9 @@ class TokenValidator extends LinValidator {
     validateLoginType(ctx) {
         if (!ctx.body.type) {
             throw new Error('type是必传值')
-            return
         }
         if (!LoginType.isThisType(ctx.body.type)) {
             throw new Error('type参数不合法')
-            return
         }
     }
 }
