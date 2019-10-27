@@ -5,6 +5,7 @@ const { User } = require("../../models/user");
 const { ParameterException } = require("../../../core/http-exception");
 const { generateToken } = require("../../../core/util");
 const { Auth } = require("../../../middleware/auth");
+const { WXManager } = require('../../services/wx')
 const router = new Router({
   prefix: "/v1/token"
 });
@@ -17,6 +18,7 @@ router.post("/", async ctx => {
       token = await emailLogin(v.get("body.account"), v.get("body.secret"));
       break;
     case LoginType.USER_MINI_PROGRAM:
+      token = await WXManager.codeToToken(v.get("body.account"))
       break;
     default:
       throw new ParameterException("没有对应登录处理");

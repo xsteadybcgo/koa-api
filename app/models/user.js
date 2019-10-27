@@ -19,6 +19,24 @@ class User extends Model {
     }
     return user
   }
+
+  static async getUserByOpenid(openid) {
+    const user = User.findOne({
+      where: {
+        openid
+      }
+    })
+    return user
+  }
+
+  static async registerByOpenid(openid) {
+    const user = User.create({
+      where: {
+        openid
+      }
+    })
+    return user
+  }
 }
 
 User.init(
