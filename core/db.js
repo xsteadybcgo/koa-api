@@ -1,3 +1,5 @@
+// 数据库连接
+
 const Sequelize = require('sequelize')
 const {dbName, host, port, user, password} = require('../config/config').database
 

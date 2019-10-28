@@ -11,10 +11,10 @@ class User extends Model {
       }
     });
     if (!user) {
-      throw new NotFound("账号不存在");      
+      throw new NotFound("账号不存在");
     }
     const isCorrect = crypt.compareSync(plainPwd, user.password)
-    if(!isCorrect) {
+    if (!isCorrect) {
       throw new AuthFailed("密码不正确")
     }
     return user
@@ -30,11 +30,7 @@ class User extends Model {
   }
 
   static async registerByOpenid(openid) {
-    const user = User.create({
-      where: {
-        openid
-      }
-    })
+    const user = User.create({ openid })
     return user
   }
 }

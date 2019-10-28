@@ -32,6 +32,14 @@ class Auth {
       next()
     };
   }
+  static verifyToken(token) {
+      try {
+          jwt.verify(token, securityConfig.secretKey)
+          return true
+      } catch (error) {
+        return false
+      }
+  }
 }
 
 module.exports = {
