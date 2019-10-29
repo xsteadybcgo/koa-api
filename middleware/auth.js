@@ -29,7 +29,7 @@ class Auth {
           uid: decode.uid,
           scope: decode.scope
       };
-      next()
+       await next()
     };
   }
   static verifyToken(token) {

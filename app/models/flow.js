@@ -1,17 +1,18 @@
 const { Sequelize, Model } = require("sequelize");
 const { sequelize } = require("../../core/db");
 
-class Flow extends Model {
+class Flow extends Model {}
 
-}
-
-Flow.init({
+Flow.init(
+  {
     index: Sequelize.INTEGER,
     artId: Sequelize.INTEGER,
     type: Sequelize.INTEGER
-}, {
+  },
+  {
     sequelize,
-    tableName: 'flow'
-})
+    tableName: "flow"
+  }
+);
 
-module.exports = {Flow}
+module.exports = { Flow };
