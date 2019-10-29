@@ -11,12 +11,19 @@ const classicFields = {
 };
 
 class Movie extends Model {}
-Movie.init(classicFields, sequelize, { tableName: "movie" });
+Movie.init(classicFields,{ sequelize,  tableName: "movie" });
 
 class Sentence extends Model {}
-Sentence.init(classicFields, sequelize, { tableName: "sentence" });
+Sentence.init(classicFields,{ sequelize,  tableName: "sentence" });
 
 class Music extends Model {}
-Music.init({ ...classicFields, url: Sequelize.STRING }, sequelize, {
+Music.init({ ...classicFields, url: Sequelize.STRING },  {
+  sequelize,
   tableName: "music"
 });
+
+module.exports = {
+  Movie, 
+  Sentence,
+  Music
+}
