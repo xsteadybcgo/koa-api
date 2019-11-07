@@ -50,7 +50,25 @@ class Forbidden extends HttpException {
     this.msg = msg || "资源未找到";
     this.errorCode = errorCode || 10006;
   }
-} 
+}
+
+class LikeError extends HttpException {
+  constructor(msg, errorCode) {
+    super();
+    this.status = 400;
+    this.msg = msg || "你已经点赞过";
+    this.errorCode = errorCode || 60001;
+  }
+}
+
+class disLikeError extends HttpException {
+  constructor(msg, errorCode) {
+    super();
+    this.status = 400;
+    this.msg = msg || "你已取消点赞";
+    this.errorCode = errorCode || 60001;
+  }
+}
 
 module.exports = {
   HttpException,
@@ -58,5 +76,7 @@ module.exports = {
   Success,
   NotFound,
   AuthFailed,
-  Forbidden
+  Forbidden,
+  LikeError,
+  disLikeError
 };

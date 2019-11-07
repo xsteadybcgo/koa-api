@@ -75,12 +75,7 @@ class TokenValidator extends LinValidator {
     this.type = [];
   }
   validateLoginType(ctx) {
-    if (!ctx.body.type) {
-      throw new Error("type是必传值");
-    }
-    if (!LoginType.isThisType(ctx.body.type)) {
-      throw new Error("type参数不合法");
-    }
+    return checkType(ctx)
   }
 }
 
@@ -93,9 +88,25 @@ class NotEmptyValidator extends LinValidator {
   }
 }
 
+function checkType(ctx) {
+    if (!ctx.body.type) {
+      throw new Error("type是必传值");
+    }
+    if (!LoginType.isThisType(ctx.body.type)) {
+      throw new Error("type参数不合法");
+    }
+  }
+class LikeValidator extends PositiveIntergerValidator {
+    constructor() {
+      super();
+      this.validateType = checkType
+    }
+  }
+
 module.exports = {
   PositiveIntergerValidator,
   RegisterValidator,
   TokenValidator,
-  NotEmptyValidator
+  NotEmptyValidator,
+  LikeValidator
 };
