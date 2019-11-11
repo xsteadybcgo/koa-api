@@ -5,6 +5,7 @@ const router = new Router({
   prefix: "/v1/classic"
 });
 const {Art} = require('../../models/art')
+const {Favor} = require('../../models/favor')
 
 
 router.get("/latest",  new Auth().m, async(ctx, next) => {
@@ -13,6 +14,8 @@ router.get("/latest",  new Auth().m, async(ctx, next) => {
   }); 
   const art = await Art.getData(flow.artId, flow.type)
   art.setDataValue('index', flow.index)
+  const likeStatus = Favor.userLikeIt(flow.artId, flow.type,ctx.auth)
+  art.setDataValue('likeStatus',likeStatus)
   ctx.body = art;
 });
 
