@@ -14,7 +14,7 @@ router.get("/latest",  new Auth().m, async(ctx, next) => {
   }); 
   const art = await Art.getData(flow.artId, flow.type)
   art.setDataValue('index', flow.index)
-  const likeStatus = Favor.userLikeIt(flow.artId, flow.type,ctx.auth)
+  const likeStatus = await Favor.userLikeIt(flow.artId, flow.type, ctx.auth.uid)
   art.setDataValue('likeStatus',likeStatus)
   ctx.body = art;
 });

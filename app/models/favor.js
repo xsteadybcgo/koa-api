@@ -29,7 +29,7 @@ class Favor extends Model {
   }
 
   static async disLike(artId, type, uid) {
-
+    
   }
 
   static async userLikeIt(artId, type, uid) {
